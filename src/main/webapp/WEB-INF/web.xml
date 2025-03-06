@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="https://jakarta.ee/xml/ns/jakartaee"
+	xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
+	version="5.0">
+
+	<display-name>Servlet and JSPs for searching for medical providers</display-name>
+
+	<description>
+		This web application searches a database of medical 
+		providers and allows users to search based on speciality and name
+	</description>
+
+	<servlet>
+		<description>A servlet that allows searching for provider information</description>
+		<display-name>Provider Information</display-name>
+		<servlet-name>providerinfo</servlet-name>
+		<servlet-class>edu.skidmore.cs276.lab07.webapps.web.ControllerServlet</servlet-class>
+	    <init-param>
+    	    <param-name>RdbDriverClass</param-name>
+        	<param-value>com.mysql.cj.jdbc.Driver</param-value>
+    	</init-param>
+    	<init-param>
+        	<param-name>RdbUrl</param-name>
+        	<param-value>jdbc:mysql://192.168.124.100:3306</param-value>
+    	</init-param>
+    	<init-param>
+        	<param-name>RdbUserId</param-name>
+        	<param-value>providerapp</param-value>
+    	</init-param>
+    	<init-param>
+        	<param-name>RdbPassword</param-name>
+        	<param-value>providerapp</param-value>
+    	</init-param>
+    	<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>providerinfo</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- Preload the JSPs -->
+	<servlet>
+		<servlet-name>search-jsp</servlet-name>
+		<jsp-file>/WEB-INF/hiddenjsp/search_criteria.jsp</jsp-file>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>providerlist-jsp</servlet-name>
+		<jsp-file>/WEB-INF/hiddenjsp/provider_list.jsp</jsp-file>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet>
+		<servlet-name>providerdetails-jsp</servlet-name>
+		<jsp-file>/WEB-INF/hiddenjsp/provider_details.jsp</jsp-file>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
+</web-app>
